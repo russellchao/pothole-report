@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Pothole Report </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    </head>
+
+    <body class="Main" id="Main">
+        <div id="Title">
+            <h1 id="Title_Text" class="WhiteText"> 
+                Pothole Report 
+                <img src="https://www.roadtrafficsigns.com/img/lg/K/pothole-slow-down-sign-k-0757.png"
+                    arc="Pothole sign"
+                    height="50"
+                    width="35">
+            </h1>
+        </div>
+
+        <div>
+            <p id="SubTitle_Text" class="WhiteText">
+                <b>Current Potholes in the world:</b>
+            </p>
+            <ol class="WhiteText">
+                <li id="LightBlue">
+                    34 Pine Avenue Sylvania, OH 43560
+                    <button onclick="showOnMap(41.6929765, -83.8129724)">View on Map</button>
+                </li>
+                <li id="LightBlue">
+                    7763 Buckingham Lane Collegeville, PA 19426
+                    <button onclick="showOnMap(40.1622996, -75.4634399)">View on Map</button>
+                </li>
+                <li id="LightBlue">
+                    129 Cactus Court Onalaska, WI 54650
+                    <button onclick="showOnMap(43.8833282, -91.2359932)">View on Map</button>
+                </li>
+            </ol>
+        </div>
+
+
+
+        <!-- Map Container -->
+        <div id="map"></div>
+
+
+
+        <!-- Form -->
+        <div class="container">
+            <h1 id="Title_Text" class="WhiteText">Report:</h1>
+            <form action="/action_page.php">
+
+                <!-- Name Input-->
+                <div>
+                    <label class="WhiteText" for="name">Name:</label>
+                </div>
+                <div>
+                    <input class="Margin" id="InputBox" type="text" name="name" placeholder="Your name...">
+                </div>
+
+                <!-- Address Input-->
+                <div>
+                    <label class="WhiteText" for="name">Address:</label>
+                </div>
+                <div>
+                    <input class="Margin" id="InputBox" type="text" name="name" placeholder="Your address...">
+                </div>
+
+                <input class="Margin" id="SubmitBox" type="submit" value="Submit">
+
+            </form>
+
+            <script>
+                // Initialize the map and set its view to a default location and zoom level
+                var map = L.map('map').setView([41.6929765, -83.8129724], 13);
+
+                // Set up Leaflet map layer using OpenStreetMap tiles
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(map);
+
+                function showOnMap(lat, lng) {
+                    // Set the view of the map to the selected location and zoom in
+                    map.setView([lat, lng], 15);
+
+                    // Add a marker at the selected location
+                    L.marker([lat, lng]).addTo(map)
+                        .bindPopup('Pothole location')
+                        .openPopup(); 
+                }
+
+            </script>
+        </div>
+
+
+    </body>
+</html>
